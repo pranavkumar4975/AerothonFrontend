@@ -1,0 +1,71 @@
+* {
+  margin: 0px;
+  padding: 5px;
+}
+body {
+  text-align: center;
+  justify-content: center;
+  background-color: #000;
+  color: #fff;
+}
+
+.heading {
+  display: flex;
+  border: 2px solid green;
+  max-width: 100%;
+  height: 60px;
+  margin: 5px;
+  padding: 2px;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logicon {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-section {
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sourse-destination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.flight-specific {
+  margin-bottom: 20px;
+}
+
+.btn {
+  height: 36px;
+  width: 120px;
+  margin: 0 auto;
+  color: #fff;
+  background-color: blue;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+}

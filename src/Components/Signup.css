@@ -1,0 +1,39 @@
+.register {
+  padding: 5%;
+  padding-top: 7%;
+  font-family: arial;
+  font-size: 25px;
+  font-weight: bold;
+}
+input {
+  background: transparent;
+  color: #ffffff;
+  padding-right: 23%;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+}
+::placeholder {
+  color: white;
+}
+::selection {
+  color: #000000;
+  background-color: #ffffff;
+}
+div.text {
+  padding-top: 11%;
+}
+div.login-btns {
+  padding-top: 12%;
+}
+.login-btns a {
+  margin-left: 20px;
+}
+
+.link {
+  color: #ededed;
+  text-align: right;
+  transform: translate(-30px);
+  text-decoration-line: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+}

@@ -1,0 +1,43 @@
+.container {
+  padding-top: 10%;
+  padding-left: 20px;
+}
+.box {
+  width: 320px;
+  height: auto;
+  border: 2px solid #4e4e4e;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 5%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+input {
+  width: 240px;
+  height: 16px;
+  margin-top: 30px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+::placeholder {
+  color: #fff;
+  font-size: 12px;
+}
+h2 {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+.link {
+  color: #ededed;
+  text-align: right;
+  transform: translate(-30px);
+  text-decoration-line: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  cursor: pointer;
+}
