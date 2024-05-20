@@ -7,13 +7,13 @@
 }
 input {
   background: transparent;
-  color: #ffffff;
+  color: #000;
   padding-right: 23%;
   border: none;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid #000;
 }
 ::placeholder {
-  color: white;
+  color: 000;
 }
 ::selection {
   color: #000000;
@@ -30,7 +30,6 @@ div.login-btns {
 }
 
 .link {
-  color: #ededed;
   text-align: right;
   transform: translate(-30px);
   text-decoration-line: none;

@@ -1,30 +1,50 @@
 .container {
-  padding-top: 10%;
-  padding-left: 20px;
+  background: transparent;
+  width: 100%;
+  height: auto;
 }
 .box {
-  width: 320px;
+  width: 40%;
   height: auto;
-  border: 2px solid #4e4e4e;
   border-radius: 10px;
-  margin: 0 auto;
-  padding: 5%;
-
+  margin: 8% auto;
+  padding: 5% 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background-color: #fff;
+  color: #000;
+  opacity: 0.9;
 }
+
+.home {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 10%;
+}
+
+.home:hover {
+  cursor: pointer;
+}
+
 input {
   width: 240px;
-  height: 16px;
-  margin-top: 30px;
+  height: 20px;
+  margin-top: 5px;
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #fff;
-  color: #fff;
+  border-bottom: 2px solid #000;
+  outline: none;
+  color: #000;
 }
+
+input:hover {
+  background-color: #e4e4e4;
+  border-radius: 5px;
+}
+
 ::placeholder {
-  color: #fff;
+  color: #000;
   font-size: 12px;
 }
 h2 {
@@ -33,7 +53,6 @@ h2 {
   font-weight: bold;
 }
 .link {
-  color: #ededed;
   text-align: right;
   transform: translate(-30px);
   text-decoration-line: none;
