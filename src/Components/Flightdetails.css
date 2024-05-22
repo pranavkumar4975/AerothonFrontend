@@ -47,7 +47,6 @@
 }
 
 .main-body{
-    /* border: 2px solid green; */
     border-radius: 5px;
     margin: 5px auto;
     min-width: none;
@@ -62,12 +61,14 @@
 .boxes{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 30px auto;
     width: 90%;
 }
 
 .boxes .wps{
     border: 2px solid red;
+    border-radius: 5px;
     width: 12%;
     height: 10vh;
     margin: auto;

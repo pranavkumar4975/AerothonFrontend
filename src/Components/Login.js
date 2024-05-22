@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import WbTwilightIcon from "@mui/icons-material/WbTwilight";
+import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
+import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,11 +26,9 @@ function Login() {
   return (
     <>
       <center>
-        <div className="container">
-          <div className="box">
-            <div className="home" onClick={Home}>
-              <h4>Back</h4>
-            </div>
+        <div className="log-container">
+          <div className="log-box">
+            <ArrowBackSharpIcon className="home" onClick={Home} />
             <h2>Login</h2>
             <div className="text">
               <input
@@ -39,8 +38,6 @@ function Login() {
                 name="user"
                 placeholder="Username"
               />
-            </div>
-            <div className="text">
               <input
                 type="password"
                 value={password}
@@ -49,13 +46,13 @@ function Login() {
                 placeholder="Password"
               />
             </div>
-            <div className="login-btns">
+            <div className="log-login-btns">
               <button id="login" onClick={Signin} className="btn">
                 Login
               </button>
-              <a onClick={SignupPage} className="link">
+              <p className="link" onClick={SignupPage}>
                 Register Here
-              </a>
+              </p>
             </div>
           </div>
         </div>

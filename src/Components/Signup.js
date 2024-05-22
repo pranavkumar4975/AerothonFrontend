@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import { useNavigate } from "react-router-dom";
+import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 
 function Signup() {
   const navigate = useNavigate();
   let [first, setFirst] = useState("");
   let [last, setLast] = useState("");
   let [email, setEmail] = useState("");
+
   let [user, setUser] = useState("");
   let [password, setPassword] = useState("");
   let [repassword, setRepassword] = useState("");
@@ -15,7 +16,6 @@ function Signup() {
   function LoginPage() {
     navigate("/login");
   }
-
 
   const Register = async () => {
     if (!first || !last || !email || !user || !password || !repassword)
@@ -35,12 +35,10 @@ function Signup() {
   };
 
   return (
-    <div class="box">
-      <div className="home" onClick={LoginPage}>
-        <h4>Back</h4>
-      </div>
-      <div class="register">Register Here</div>
-      <div class="text">
+    <div class="sign-box">
+      <ArrowBackSharpIcon className="home" onClick={LoginPage} />
+      <h2>Register Here</h2>
+      <div class="log-text">
         <input
           type="text"
           value={first}
@@ -48,8 +46,6 @@ function Signup() {
           name="first name"
           placeholder="First Name"
         />
-      </div>
-      <div class="text">
         <input
           type="text"
           value={last}
@@ -57,8 +53,6 @@ function Signup() {
           name="last name"
           placeholder="Last Name"
         />
-      </div>
-      <div class="text">
         <input
           type="email"
           value={email}
@@ -66,8 +60,6 @@ function Signup() {
           name="email"
           placeholder="Email"
         />
-      </div>
-      <div class="text">
         <input
           type="text"
           value={user}
@@ -75,8 +67,6 @@ function Signup() {
           name="username"
           placeholder="Username"
         />
-      </div>
-      <div class="text">
         <input
           type="password"
           value={password}
@@ -84,8 +74,6 @@ function Signup() {
           name="password"
           placeholder="Password"
         />
-      </div>
-      <div class="text">
         <input
           type="password"
           value={repassword}
@@ -98,9 +86,9 @@ function Signup() {
         <button class="btn" onClick={Register}>
           Sign up
         </button>
-        <a onClick={LoginPage} class="link">
+        <p onClick={LoginPage} class="link">
           Login
-        </a>
+        </p>
       </div>
     </div>
   );

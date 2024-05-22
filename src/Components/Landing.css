@@ -26,6 +26,7 @@ body {
   margin: 10px;
   padding: 5px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .left {
@@ -62,10 +63,15 @@ body {
 
 .logicon {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   outline: none;
   padding: 5px;
+}
+
+.logicon h4 {
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .main-section {
