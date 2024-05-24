@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Flightdetails.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PublicIcon from "@mui/icons-material/Public";
@@ -11,9 +11,14 @@ import FlightLandSharpIcon from "@mui/icons-material/FlightLandSharp";
 import Weatherdetails from "./Weatherdetails";
 import getFormattedWeatherdata from "../Services/Weatherservices";
 import LoadingPage from "./LoadingPage";
+import { getFlightPath, getNewFlightPath } from "../Services/FlightServices";
 
 function Flightdetails() {
+  const location = useLocation();
   const navigate = useNavigate();
+  const fid = location.state?.id;
+  const name = location.state?.name;
+  console.log(fid);
   const [weather, setWeather] = useState(null);
   const [query, setQuery] = useState({ lat: 25.5941, lon: 85.1376 });
 
@@ -24,6 +29,8 @@ function Flightdetails() {
   const [short, setShort] = useState(false);
   const [current, setCurrent] = useState(true);
   const [topic, setTopic] = useState("Current Location");
+  const [path, setPath] = useState([]);
+  const [altPath, setAltPath] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,6 +79,7 @@ function Flightdetails() {
       status: 1,
     },
   ];
+
   function Home() {
     navigate("/");
   }
@@ -85,7 +93,7 @@ function Flightdetails() {
     setStatus(status);
   }
 
-  function Alternate() {
+  const Alternate = async () => {
     setActual(false);
     if (alter) {
       setAlter(false);
@@ -98,9 +106,17 @@ function Flightdetails() {
 
     if (short) setShort(false);
     else setShort(true);
-  }
 
-  function Actual() {
+    try {
+      // const newflightPath = await getNewFlightPath(fid);
+      // console.log(newflightPath);
+      // setAltPath(newflightPath);
+    } catch (error) {
+      console.error("Error Fetching new Path", error);
+    }
+  };
+
+  const Actual = async () => {
     setAlter(false);
     if (actual) {
       setActual(false);
@@ -111,7 +127,15 @@ function Flightdetails() {
     }
     setLoading(true);
     setShort(false);
-  }
+
+    try {
+      // const flightPath = await getFlightPath(fid);
+      // console.log(flightPath);
+      // setPath(flightPath);
+    } catch (error) {
+      console.error("Error Fetching actual path", error);
+    }
+  };
 
   function Shortest() {}
 
@@ -138,14 +162,14 @@ function Flightdetails() {
           <FavoriteIcon className="icons" />
           <div className="login-icon">
             <AccountCircleIcon className="icons" />
-            <h4 onClick={LoginPage}>Login</h4>
+            <h4 onClick={LoginPage}>{name?name:"Login"}</h4>
           </div>
         </div>
       </div>
       <div className="main-body">
         <h3>Flight details</h3>
         <div className="flight-detail">
-          <h4>Flight id: 12345</h4>
+          <h4>Flight id: {location.state?.id}</h4>
           <div className="points">
             <div className="point">
               <p>Source: </p>
@@ -185,7 +209,7 @@ function Flightdetails() {
 
         <div className="buttons">
           <button className="btns" onClick={Actual}>
-            actual
+            Actual
           </button>
           <button className="btns" onClick={Alternate}>
             Alternate

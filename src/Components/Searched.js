@@ -3,11 +3,27 @@ import ConnectingAirportsOutlinedIcon from "@mui/icons-material/ConnectingAirpor
 import { useNavigate } from "react-router-dom";
 import "./Searched.css";
 
-function Searched({ fid, departure, source, finaltime, destination }) {
+function Searched({
+  name,
+  fid,
+  departure,
+  source,
+  lastlocation,
+  finaltime,
+  destination,
+}) {
   const navigate = useNavigate();
 
   function Flightdetails() {
-    navigate("/flightdetails");
+    navigate("/flightdetails", {
+      state: {
+        id: fid,
+        destination: departure,
+        source: source,
+        current: lastlocation,
+        name:name,
+      },
+    });
   }
 
   return (

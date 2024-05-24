@@ -3,6 +3,7 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
+import { AuthUser } from "../Services/AuthServices";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,6 +21,21 @@ function Login() {
   const Signin = async () => {
     if (!user || !password) alert("enter valid username and password");
     else {
+      const Payload = {
+        userName: user,
+        password: password,
+      };
+
+      try {
+        const logedIn = await AuthUser(Payload);
+        alert("User logged In successfully");
+        console.log(logedIn);
+        setPassword("");
+        navigate("/", { state: { name: logedIn?.firstName } });
+      } catch (error) {
+        console.error("Error Fetching user", error);
+        alert("No User Found");
+      }
     }
   };
 

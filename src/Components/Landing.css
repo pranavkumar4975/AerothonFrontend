@@ -14,7 +14,7 @@ body {
 }
 
 .landing {
-  height: 98vh;
+  height: 100%;
   border-radius: 3px;
   padding: 5px 2px;
 }
@@ -75,7 +75,7 @@ body {
 }
 
 .main-section {
-  width: 60%;
+  width: 55%;
   height: auto;
   display: flex;
   flex-direction: column;

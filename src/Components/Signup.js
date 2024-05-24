@@ -25,19 +25,12 @@ function Signup() {
       alert("password must be of size more than or equal to 8");
     else if (password !== repassword) alert("password didnt matched");
     else {
-      setFirst("");
-      setLast("");
-      setEmail("");
-      setUser("");
-      setPassword("");
-      setRepassword("");
-
       const newUser = {
-        firstName: { first },
-        lastName: { last },
-        userName: { user },
-        password: { password },
-        email: { email },
+        firstName: first,
+        lastName: last,
+        userName: user,
+        password: password,
+        email: email,
       };
 
       console.log(newUser);
@@ -45,12 +38,17 @@ function Signup() {
       try {
         const createdUser = await createUser(newUser);
         console.log(createdUser);
+        alert("User Signed Up Successfully");
         navigate("/login");
+        setFirst("");
+        setLast("");
+        setEmail("");
+        setUser("");
+        setPassword("");
+        setRepassword("");
       } catch (error) {
         console.error("Error creating user", error);
       }
-
-      // navigate("/");
     }
   };
 
