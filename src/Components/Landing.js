@@ -44,7 +44,7 @@ function Landing() {
           <PublicIcon className="icons" />
           <FavoriteIcon className="icons" />
           <div className="logicon">
-            <AccountCircleIcon className="icons"/>
+            <AccountCircleIcon className="icons" />
             <h4 onClick={LoginPage}>Login</h4>
           </div>
         </div>

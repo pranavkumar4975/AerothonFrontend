@@ -13,19 +13,19 @@ const getWeatherData = (infoType, searchParams) => {
 const formatCurrentWeather = (data) => {
   console.log(data);
   if (data.cod !== 200) {
-    alert("City not Found");
+    alert("Place not Found");
     return;
   }
 
   const {
     coord: { lat, lon },
-    main: { temp, feels_like, temp_min, temp_max, humidity,pressure },
+    main: { temp, feels_like, temp_min, temp_max, humidity, pressure },
     name,
     visibility,
     dt,
     sys: { country },
     weather,
-    wind: { speed },
+    wind: { speed, gust },
   } = data;
 
   const { main: details, icon } = weather[0];
@@ -45,6 +45,7 @@ const formatCurrentWeather = (data) => {
     details,
     icon,
     speed,
+    gust,
   };
 };
 

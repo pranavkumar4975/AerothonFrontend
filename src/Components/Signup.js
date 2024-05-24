@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Signup.css";
 import { useNavigate } from "react-router-dom";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
+import { createUser } from "../Services/AuthServices";
 
 function Signup() {
   const navigate = useNavigate();
@@ -30,15 +31,34 @@ function Signup() {
       setUser("");
       setPassword("");
       setRepassword("");
-      navigate("/");
+
+      const newUser = {
+        firstName: { first },
+        lastName: { last },
+        userName: { user },
+        password: { password },
+        email: { email },
+      };
+
+      console.log(newUser);
+
+      try {
+        const createdUser = await createUser(newUser);
+        console.log(createdUser);
+        navigate("/login");
+      } catch (error) {
+        console.error("Error creating user", error);
+      }
+
+      // navigate("/");
     }
   };
 
   return (
-    <div class="sign-box">
+    <div className="sign-box">
       <ArrowBackSharpIcon className="home" onClick={LoginPage} />
       <h2>Register Here</h2>
-      <div class="log-text">
+      <div className="log-text">
         <input
           type="text"
           value={first}
@@ -82,11 +102,11 @@ function Signup() {
           placeholder="Confirm Password"
         />
       </div>
-      <div class="login-btns">
-        <button class="btn" onClick={Register}>
+      <div className="login-btns">
+        <button className="btn" onClick={Register}>
           Sign up
         </button>
-        <p onClick={LoginPage} class="link">
+        <p onClick={LoginPage} className="link">
           Login
         </p>
       </div>
