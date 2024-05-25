@@ -12,14 +12,20 @@ function Landing() {
   const navigate = useNavigate();
   const location = useLocation();
   const name = location.state?.name;
-  let [flight, setFlight] = useState("12345");
+  let [flight, setFlight] = useState("QR6100");
   let [fpop, setFpop] = useState(false);
   let [source, setSource] = useState("Patna");
   let [destination, setDestination] = useState("Delhi");
-  let [current, setCurrent] = useState("Varanasi");
   let [departure, setDeparture] = useState("13:25");
-  let [finaltime, setFinaltime] = useState("19:46");
-  const [login, setLogin] = useState("Login");
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+
+  const getTime = (isoString) => {
+    const date = new Date(isoString);
+    const hours = date.getUTCHours().toString().padStart(2, '0'); // Get hours in UTC and pad with leading zero if necessary
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0'); // Get minutes in UTC and pad with leading zero if necessary
+    return `${hours}:${minutes}`;
+  };
 
   console.log(name);
 
@@ -32,16 +38,17 @@ function Landing() {
   };
 
   const Searchflight = async () => {
-    const Payload = {
-      id: flight,
-    };
 
     try {
-      // const flightData = await getFlight(Payload);
-      // console.log(flightData);
-      // setSource(flightData?.source);
-      // setDestination(flightData?.destination);
-      // setCurrent(flightData?.lastlocation);
+      const flightData = await getFlight(flight);
+      console.log(flightData);
+      setSource(flightData?.source.airport);
+      setDestination(flightData?.destination.airport);
+      // setCurrent(flightData?.lastPosition);
+      setLat(flightData?.lastPosition.lattitude);
+      setLon(flightData?.lastPosition.longitude);
+      // setDeparture(flightData?.source.scheduled);
+      setDeparture(getTime(flightData?.source.scheduled))
     } catch (error) {
       console.error("Error Fetching Flight", error);
       alert("Error Fetching Flight", error);
@@ -91,9 +98,9 @@ function Landing() {
           fid={flight}
           departure={departure}
           source={source}
-          lastlocation={current}
-          finaltime={finaltime}
           destination={destination}
+          lattitude={lat}
+          longitude={lon}
         />
       ) : (
         ""

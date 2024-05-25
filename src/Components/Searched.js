@@ -8,9 +8,9 @@ function Searched({
   fid,
   departure,
   source,
-  lastlocation,
-  finaltime,
   destination,
+  lattitude,
+  longitude,
 }) {
   const navigate = useNavigate();
 
@@ -20,8 +20,9 @@ function Searched({
         id: fid,
         destination: destination,
         source: source,
-        current: lastlocation,
         name: name,
+        lattitude: lattitude,
+        longitude: longitude,
       },
     });
   }
@@ -36,7 +37,7 @@ function Searched({
         </div>
         <ConnectingAirportsOutlinedIcon />
         <div className="dest">
-          <p>{finaltime}</p>
+          <p>19:20</p>
           <p>To: {destination}</p>
         </div>
       </div>

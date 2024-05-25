@@ -1,5 +1,4 @@
 .flightdetails {
-  position: absolute;
   margin: auto;
   min-height: 96vh;
   width: 99.6%;
@@ -86,7 +85,7 @@ h3 {
   /* justify-content: space-around; */
 }
 
-.point{
+.point {
   flex-direction: column;
   border-radius: 5px;
 }
@@ -107,13 +106,15 @@ p {
   width: 40%;
   margin: auto;
 }
+
 .btns {
   font-size: 15px;
   width: 100px;
-  height: 5vh;
+  height: 6vh;
   margin: 10px 10%;
   border-radius: 5px;
   cursor: pointer;
+  padding: 2px;
 }
 
 .btns :onclick {
@@ -124,7 +125,8 @@ p {
   border: 2px solid rgb(217, 205, 205);
   border-radius: 5px;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  padding: 5px;
   box-shadow: 2px 2px 3px rgb(5, 80, 106);
   margin: 5px auto;
 }
@@ -139,11 +141,15 @@ p {
   align-items: center;
   margin: 10px auto;
   width: 100%;
-
+  border: 2px solid rgb(231, 239, 231);
+  box-shadow: 3px 3px 3px rgb(5, 80, 106);
+  border-radius: 5px;
+  height: 15vh;
 }
 
 .boxes .wps {
   /* border: 2px solid red; */
+  flex-direction: column;
   border-radius: 5px;
   width: 12%;
   height: 10vh;

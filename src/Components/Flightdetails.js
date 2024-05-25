@@ -12,17 +12,18 @@ import Weatherdetails from "./Weatherdetails";
 import getFormattedWeatherdata from "../Services/Weatherservices";
 import LoadingPage from "./LoadingPage";
 import { getFlightPath, getNewFlightPath } from "../Services/FlightServices";
-import e from "cors";
 
 function Flightdetails() {
   const location = useLocation();
   const navigate = useNavigate();
   const fid = location.state?.id;
   const name = location.state?.name;
-  const currentlocation = location.state?.current;
+  const lattitude = location.state?.lattitude;
+  const longitude = location.state?.longitude;
+  console.log(lattitude);
   console.log(fid);
   const [weather, setWeather] = useState(null);
-  const [query, setQuery] = useState({ q: currentlocation });
+  const [query, setQuery] = useState({ lat: lattitude, lon: longitude });
 
   const [isLoading, setLoading] = useState(false);
   const [status, setStatus] = useState();
@@ -50,38 +51,105 @@ function Flightdetails() {
     };
   }, [query, actual, alter]);
 
-  const coords = [
-    {
-      id: 1,
-      lat: 25.5941,
-      lon: 85.1376,
-      status: 1,
-    },
-    {
-      id: 2,
-      lat: 25.2372,
-      lon: 86.9746,
-      status: 1,
-    },
-    {
-      id: 3,
-      lat: 24.7487,
-      lon: 84.3807,
-      status: 1,
-    },
-    {
-      id: 4,
-      lat: 17.4,
-      lon: 19.1,
-      status: 1,
-    },
-    {
-      id: 5,
-      lat: 17.5,
-      lon: 19.1,
-      status: 1,
-    },
-  ];
+  // const coords = [
+  //   {
+  //     id: 1,
+  //     lat: 25.5941,
+  //     lon: 85.1376,
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //     lat: 25.2372,
+  //     lon: 86.9746,
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 3,
+  //     lat: 24.7487,
+  //     lon: 84.3807,
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 4,
+  //     lat: 17.4,
+  //     lon: 19.1,
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 5,
+  //     lat: 17.5,
+  //     lon: 19.1,
+  //     status: 1,
+  //   },
+  // ];
+
+  // const paths = [
+  //   [
+  //     {
+  //       id: 1,
+  //       lat: 26.5941,
+  //       lon: 85.1376,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 2,
+  //       lat: 25.2372,
+  //       lon: 86.9746,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 3,
+  //       lat: 24.7487,
+  //       lon: 84.3807,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 4,
+  //       lat: 17.4,
+  //       lon: 19.1,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 5,
+  //       lat: 17.5,
+  //       lon: 19.1,
+  //       status: 1,
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       id: 1,
+  //       lat: 25.5941,
+  //       lon: 85.1376,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 2,
+  //       lat: 25.2372,
+  //       lon: 86.9746,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 3,
+  //       lat: 24.7487,
+  //       lon: 84.3807,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 4,
+  //       lat: 17.4,
+  //       lon: 19.1,
+  //       status: 1,
+  //     },
+  //     {
+  //       id: 5,
+  //       lat: 17.5,
+  //       lon: 19.1,
+  //       status: 1,
+  //     },
+  //   ],
+  // ];
 
   function Home() {
     navigate("/");
@@ -98,9 +166,21 @@ function Flightdetails() {
 
   const Alternate = async () => {
     try {
-      // const newflightPath = await getNewFlightPath(fid);
-      // console.log(newflightPath);
-      // setNewPath(newflightPath);
+      const sourcelat = 40.73061;
+      const sourcelong = -73.935242;
+
+      const destinationLat = 34.052235;
+      const destinationLong = -118.243683;
+
+      const newflightPath = await getNewFlightPath(
+        sourcelat,
+        sourcelong,
+        destinationLat,
+        destinationLong
+      );
+      console.log(newflightPath);
+      setNewPath(newflightPath);
+      console.log(newPath);
     } catch (error) {
       console.error("Error Fetching new Path", error);
     }
@@ -123,9 +203,10 @@ function Flightdetails() {
 
   const Actual = async () => {
     try {
-      // const flightPath = await getFlightPath(fid);
-      // console.log(flightPath);
-      // setPath(flightPath);
+      const flightPath = await getFlightPath(fid);
+      console.log(flightPath);
+      setPath(flightPath);
+      console.log(path);
     } catch (error) {
       console.error("Error Fetching actual path", error);
     }
@@ -194,10 +275,10 @@ function Flightdetails() {
               id="scroll-text"
             />
             <div className="point">
-              <p>Current Location: {location.state?.current} </p>
+              <p>Current Location: </p>
               <div className="lat-lon">
-                <p>lat: 25.3176</p>
-                <p>lon: 82.9739</p>
+                <p>lat: {lattitude}</p>
+                <p>lon: {longitude}</p>
               </div>
             </div>
             <FlightLandSharpIcon
@@ -249,22 +330,26 @@ function Flightdetails() {
             <div className="waypoints">
               <h4 color="black">Actual route</h4>
               <div className="boxes">
-                {coords.map((coord) => {
+                {path.map((coord, index) => {
                   return (
                     <>
                       <div
                         className="wps"
                         onClick={() => {
-                          getdata(coord.lat, coord.lon, coord.status);
+                          getdata(
+                            coord.lattitude,
+                            coord.longitude,
+                            coord.isSafeToTravel
+                          );
                         }}
                       >
                         <img src="plane2.jpg" alt="" />
                         <div className="lat-lon">
-                          <p>lat: {coord.lat}</p>
-                          <p>lon: {coord.lon}</p>
+                          <p>lat: {coord.lattitude}</p>
+                          <p>lon: {coord.longitude}</p>
                         </div>
                       </div>
-                      {coord.id !== 5 ? (
+                      {index !== 5 ? (
                         <ArrowForwardSharpIcon
                           fontSize="large"
                           style={{ color: "red" }}
@@ -295,34 +380,35 @@ function Flightdetails() {
           <>
             <div className="waypoints">
               <h4 color="black">Alternate route </h4>
-              <div className="boxes">
-                {coords.map((coord) => {
-                  return (
-                    <>
-                      <div
-                        className="wps"
-                        onClick={() => getdata(coord.lat, coord.lon)}
-                      >
-                        <img src="plane2.jpg" alt="" />
-                        <div className="lat-lon">
-                          <p>lat: {coord.lat}</p>
-                          <p>lon: {coord.lon}</p>
+
+              {newPath.map((currpath,index) => (
+                <div className="boxes">
+                  <React.Fragment key={index}>
+                    {currpath.map((coord, ind) => (
+                      <React.Fragment key={coord.ind}>
+                        <div
+                          className="wps"
+                          onClick={() => getdata(coord.latitude, coord.longitude)}
+                        >
+                          <img src="plane2.jpg" alt="" />
+                          <div className="lat-lon">
+                            <p>lat: {coord.latitude}</p>
+                            <p>lon: {coord.longitude}</p>
+                          </div>
                         </div>
-                      </div>
-                      {coord.id !== 5 ? (
-                        <ArrowForwardSharpIcon
-                          fontSize="large"
-                          style={{ color: "blue" }}
-                          className="arrow-icons"
-                          id="scroll-text"
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </>
-                  );
-                })}
-              </div>
+                        {ind !== 6 && (
+                          <ArrowForwardSharpIcon
+                            fontSize="large"
+                            style={{ color: "blue" }}
+                            className="arrow-icons"
+                            id="scroll-text"
+                          />
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </React.Fragment>
+                </div>
+              ))}
             </div>{" "}
             {isLoading ? (
               <LoadingPage className="loading" />
@@ -342,20 +428,20 @@ function Flightdetails() {
             <div className="waypoints">
               <h4 color="black">Shortest Alternate Route</h4>
               <div className="boxes">
-                {coords.map((coord) => {
+                {newPath[0].map((coord,index) => {
                   return (
                     <>
                       <div
                         className="wps"
-                        onClick={() => getdata(coord.lat, coord.lon)}
+                        onClick={() => getdata(coord.latitude, coord.longitude)}
                       >
                         <img src="plane2.jpg" alt="" />
                         <div className="lat-lon">
-                          <p>lat: {coord.lat}</p>
-                          <p>lon: {coord.lon}</p>
+                          <p>lat: {coord.latitude}</p>
+                          <p>lon: {coord.longitude}</p>
                         </div>
                       </div>
-                      {coord.id !== 5 ? (
+                      {index !== 6 ? (
                         <ArrowForwardSharpIcon
                           fontSize="large"
                           style={{ color: "blue" }}
