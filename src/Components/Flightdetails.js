@@ -12,6 +12,7 @@ import Weatherdetails from "./Weatherdetails";
 import getFormattedWeatherdata from "../Services/Weatherservices";
 import LoadingPage from "./LoadingPage";
 import { getFlightPath, getNewFlightPath } from "../Services/FlightServices";
+import e from "cors";
 
 function Flightdetails() {
   const location = useLocation();
@@ -28,6 +29,7 @@ function Flightdetails() {
   const [actual, setActual] = useState(false);
   const [alter, setAlter] = useState(false);
   const [short, setShort] = useState(false);
+  const [spop, setSpop] = useState(false);
   const [current, setCurrent] = useState(true);
   const [topic, setTopic] = useState("Current Location");
   const [path, setPath] = useState([]);
@@ -115,6 +117,8 @@ function Flightdetails() {
 
     if (short) setShort(false);
     else setShort(true);
+
+    setSpop(false);
   };
 
   const Actual = async () => {
@@ -136,9 +140,13 @@ function Flightdetails() {
     }
     setLoading(true);
     setShort(false);
+    setSpop(false);
   };
 
-  function Shortest() {}
+  function Shortest() {
+    setAlter(false);
+    setSpop(true);
+  }
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -287,6 +295,52 @@ function Flightdetails() {
           <>
             <div className="waypoints">
               <h4 color="black">Alternate route </h4>
+              <div className="boxes">
+                {coords.map((coord) => {
+                  return (
+                    <>
+                      <div
+                        className="wps"
+                        onClick={() => getdata(coord.lat, coord.lon)}
+                      >
+                        <img src="plane2.jpg" alt="" />
+                        <div className="lat-lon">
+                          <p>lat: {coord.lat}</p>
+                          <p>lon: {coord.lon}</p>
+                        </div>
+                      </div>
+                      {coord.id !== 5 ? (
+                        <ArrowForwardSharpIcon
+                          fontSize="large"
+                          style={{ color: "blue" }}
+                          className="arrow-icons"
+                          id="scroll-text"
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  );
+                })}
+              </div>
+            </div>{" "}
+            {isLoading ? (
+              <LoadingPage className="loading" />
+            ) : (
+              <Weatherdetails
+                weather={weather}
+                status={status}
+                topic={topic}
+                className="weather-details"
+              />
+            )}
+          </>
+        )}
+
+        {spop && (
+          <>
+            <div className="waypoints">
+              <h4 color="black">Shortest Alternate Route</h4>
               <div className="boxes">
                 {coords.map((coord) => {
                   return (

@@ -21,7 +21,6 @@ function Landing() {
   let [finaltime, setFinaltime] = useState("19:46");
   const [login, setLogin] = useState("Login");
 
-  // if (name) setLogin(name);
   console.log(name);
 
   const LoginPage = () => {
