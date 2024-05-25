@@ -18,10 +18,10 @@ function Searched({
     navigate("/flightdetails", {
       state: {
         id: fid,
-        destination: departure,
+        destination: destination,
         source: source,
         current: lastlocation,
-        name:name,
+        name: name,
       },
     });
   }

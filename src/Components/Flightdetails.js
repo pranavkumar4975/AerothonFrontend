@@ -18,9 +18,10 @@ function Flightdetails() {
   const navigate = useNavigate();
   const fid = location.state?.id;
   const name = location.state?.name;
+  const currentlocation = location.state?.current;
   console.log(fid);
   const [weather, setWeather] = useState(null);
-  const [query, setQuery] = useState({ lat: 25.5941, lon: 85.1376 });
+  const [query, setQuery] = useState({ q: currentlocation });
 
   const [isLoading, setLoading] = useState(false);
   const [status, setStatus] = useState();
@@ -30,7 +31,7 @@ function Flightdetails() {
   const [current, setCurrent] = useState(true);
   const [topic, setTopic] = useState("Current Location");
   const [path, setPath] = useState([]);
-  const [altPath, setAltPath] = useState([]);
+  const [newPath, setNewPath] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -94,6 +95,14 @@ function Flightdetails() {
   }
 
   const Alternate = async () => {
+    try {
+      // const newflightPath = await getNewFlightPath(fid);
+      // console.log(newflightPath);
+      // setNewPath(newflightPath);
+    } catch (error) {
+      console.error("Error Fetching new Path", error);
+    }
+
     setActual(false);
     if (alter) {
       setAlter(false);
@@ -106,17 +115,17 @@ function Flightdetails() {
 
     if (short) setShort(false);
     else setShort(true);
-
-    try {
-      // const newflightPath = await getNewFlightPath(fid);
-      // console.log(newflightPath);
-      // setAltPath(newflightPath);
-    } catch (error) {
-      console.error("Error Fetching new Path", error);
-    }
   };
 
   const Actual = async () => {
+    try {
+      // const flightPath = await getFlightPath(fid);
+      // console.log(flightPath);
+      // setPath(flightPath);
+    } catch (error) {
+      console.error("Error Fetching actual path", error);
+    }
+
     setAlter(false);
     if (actual) {
       setActual(false);
@@ -127,14 +136,6 @@ function Flightdetails() {
     }
     setLoading(true);
     setShort(false);
-
-    try {
-      // const flightPath = await getFlightPath(fid);
-      // console.log(flightPath);
-      // setPath(flightPath);
-    } catch (error) {
-      console.error("Error Fetching actual path", error);
-    }
   };
 
   function Shortest() {}
@@ -162,7 +163,7 @@ function Flightdetails() {
           <FavoriteIcon className="icons" />
           <div className="login-icon">
             <AccountCircleIcon className="icons" />
-            <h4 onClick={LoginPage}>{name?name:"Login"}</h4>
+            <h4 onClick={LoginPage}>{name ? name : "Login"}</h4>
           </div>
         </div>
       </div>
@@ -172,7 +173,7 @@ function Flightdetails() {
           <h4>Flight id: {location.state?.id}</h4>
           <div className="points">
             <div className="point">
-              <p>Source: </p>
+              <p>Source: {location.state?.source} </p>
               <div className="lat-lon">
                 <p>lat: 25.5941</p>
                 <p>lon: 85.1376</p>
@@ -185,7 +186,7 @@ function Flightdetails() {
               id="scroll-text"
             />
             <div className="point">
-              <p>Current Location: </p>
+              <p>Current Location: {location.state?.current} </p>
               <div className="lat-lon">
                 <p>lat: 25.3176</p>
                 <p>lon: 82.9739</p>
@@ -198,7 +199,7 @@ function Flightdetails() {
               id="scroll-text"
             />
             <div className="point">
-              <p>Destination: </p>
+              <p>Destination: {location.state?.destination}</p>
               <div className="lat-lon">
                 <p>lat: 28.7041</p>
                 <p>lon: 77.1025</p>

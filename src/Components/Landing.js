@@ -42,8 +42,10 @@ function Landing() {
       // console.log(flightData);
       // setSource(flightData?.source);
       // setDestination(flightData?.destination);
+      // setCurrent(flightData?.lastlocation);
     } catch (error) {
       console.error("Error Fetching Flight", error);
+      alert("Error Fetching Flight", error);
     }
 
     setFpop(true);
@@ -91,8 +93,8 @@ function Landing() {
           departure={departure}
           source={source}
           lastlocation={current}
-          destination={destination}
           finaltime={finaltime}
+          destination={destination}
         />
       ) : (
         ""
